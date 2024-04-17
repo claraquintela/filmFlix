@@ -3,6 +3,7 @@ const fs = require("fs");
 const express = require("express");
 const path = require("path");
 const server = express();
+const cors = require("cors");
 
 // conexão com a base de dados
 const db = require("./data/db");
@@ -13,6 +14,7 @@ const dotenv = require("dotenv");
 const { log } = require("console");
 dotenv.config();
 
+server.use(cors());
 server.use(express.json()); //permet d'envoyer des donnés json dans le body
 server.use(express.urlencoded({extended:true})); // Pour les formulaires HTML. YNGN nesse projeto, mas taqui pra quando precisar.
 
