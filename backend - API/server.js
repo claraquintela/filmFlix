@@ -13,6 +13,9 @@ const dotenv = require("dotenv");
 const { log } = require("console");
 dotenv.config();
 
+server.use(express.json()); //permet d'envoyer des donnés json dans le body
+server.use(express.urlencoded({extended:true})); // Pour les formulaires HTML. YNGN nesse projeto, mas taqui pra quando precisar.
+
 // Todos os caminhos que estão dentro localhost:5501/public estão acessiveis ao Express
 server.use(express.static(path.join(__dirname, "public")));
 
