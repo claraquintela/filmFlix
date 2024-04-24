@@ -7,6 +7,171 @@
     <title>Index</title>
   </head>
   <body>
-    <h1>Accueil</h1>
+    <h1>API Films</h1>
+
+    <div class="section_documentation">
+      <h2>Documentation</h2>
+      <p>
+        Cette API permet d'afficher, d'ajouter, de modifier e de supprimer des
+        films de la base de données.
+      </p>
+      <p>
+        Lien site :
+        <a href="https://four1f-tp1-claraquintela-1.onrender.com"
+          >https://four1f-tp1-claraquintela-1.onrender.com</a
+        >
+      </p>
+      <p>
+        Lien
+        <a
+          href="https://github.com/Maisonneuve-LacasseGermainMaxime/41f-tp1-claraquintela/tree/master"
+          >Github</a
+        >
+      </p>
+    </div>
+
+    <div>
+      <h2>Routes</h2>
+
+      <section class="section_filme">
+        <h3>Films</h3>
+
+        <dl>
+          <dt>* Récupérer la liste de tous les films</dt>
+
+          <dd>GET api/films</dd>
+          <dd>
+            <a href="https://four1f-tp1-claraquintela-1.onrender.com/api/films"
+              >https://four1f-tp1-claraquintela-1.onrender.com/api/films</a
+            >
+          </dd>
+        </dl>
+
+        <dl>
+          <dt>* Ajouter un nouveau film</dt>
+
+          <dd>POST api/films</dd>
+          <dd>
+            <a href="https://four1f-tp1-claraquintela-1.onrender.com/api/films"
+              >https://four1f-tp1-claraquintela-1.onrender.com/api/films</a
+            >
+          </dd>
+
+          <dd>
+            Pametres requis: un objet film dans le corps de la rêquete:
+
+            <pre>
+              let film = {
+                titre: "titre",
+                description: "description",
+                annee: 2024,
+                realisation: "nom du réalisateur",
+                genre: "genre du film",
+                titreVignette: "titre de la vignette"
+              }
+        </pre
+            >
+          </dd>
+        </dl>
+
+        <dl>
+          <dt>* Récupérer un film spécifique</dt>
+
+          <dd>GET api/films/{id}</dd>
+
+          <dd>
+            <a
+              href="https://four1f-tp1-claraquintela-1.onrender.com/api/films/{id}"
+              >https://four1f-tp1-claraquintela-1.onrender.com/api/films/{id}</a
+            >
+          </dd>
+
+          <dd>Parmètre requis: id du film</dd>
+        </dl>
+
+        <dl>
+          <dt>* Éditer les informations d'un film spécifique</dt>
+
+          <dd>PUT api/films/{id}</dd>
+
+          <dd>
+            <a
+              href="https://four1f-tp1-claraquintela-1.onrender.com/api/films/{id}"
+              >https://four1f-tp1-claraquintela-1.onrender.com/api/films/{id}</a
+            >
+          </dd>
+
+          <dd>Pametres requis: un objet film dans le corps de la rêquete:</dd>
+
+          <pre>
+            let film = {
+                    titre: "titre",
+                    description: "description",
+                    annee: 2024,
+                    realisation: "nom du réalisateur",
+                    genre: "genre du film",
+                    titreVignette: "titre de la vignette"
+                  }
+          </pre>
+        </dl>
+
+        <dl>
+          <dt>* Deleter un film spécifique</dt>
+
+          <dd>DELETE api/films/{id}</dd>
+
+          <dd>
+            <a
+              href="https://four1f-tp1-claraquintela-1.onrender.com/api/films/{id}"
+              >https://four1f-tp1-claraquintela-1.onrender.com/api/films/{id}</a
+            >
+          </dd>
+
+          <dd>Parmètre requis: id du film</dd>
+        </dl>
+      </section>
+
+      <section class="setion_utilisateurs">
+        <h3>Utilisateurs</h3>
+
+        <dl>
+          <dt>Pour avoir la liste de tous les utilisateurs</dt>
+          <dd>GET /api/utilisateurs</dd>
+          <dd>
+            <a
+              href="https://four1f-tp1-claraquintela-1.onrender.com/api/utilisateurs"
+              >https://four1f-tp1-claraquintela-1.onrender.com/api/utilisateurs</a
+            >
+          </dd>
+        </dl>
+
+        <dl>
+          <dt>Pour faire s'inscrire dans le site</dt>
+          <dd>POST /api/utilisateurs/inscription</dd>
+          <dd>
+            <a
+              href="https://four1f-tp1-claraquintela-1.onrender.com/api/utilisateurs/inscription"
+              >https://four1f-tp1-claraquintela-1.onrender.com/api/utilisateurs/inscription</a
+            >
+          </dd>
+        </dl>
+
+        <dl>
+          <dt>Pour faire le login</dt>
+          <dd>POST /api/utilisateurs/connexion</dd>
+          <dd>
+            <a
+              href="https://four1f-tp1-claraquintela-1.onrender.com/api/utilisateurs/connexion"
+              >https://four1f-tp1-claraquintela-1.onrender.com/api/utilisateurs/connexion</a
+            >
+          </dd>
+        </dl>
+
+        <dl>
+          <dt></dt>
+          <dd></dd>
+        </dl>
+      </section>
+    </div>
   </body>
 </html>
