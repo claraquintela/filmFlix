@@ -6,13 +6,14 @@ const server = express();
 const cors = require("cors");
 const bcrypt = require("bcrypt"); // Para inscriptar o mdp
 const {check, validationResult, body, param, query}= require("express-validator"); // essa biblioteca tem funções de base para validar dados inputados no frontend
-
+const { v4: uuidv4 } = require('uuid');
 // conexão com a base de dados
 const db = require("./data/db");
 
 
 //Doit être défini au début de l'application
 const dotenv = require("dotenv");
+const { log } = require("console");
 dotenv.config();
 
 server.use(cors());
@@ -29,7 +30,8 @@ server.get(
     "/api/films",
     [
         check("ordre").escape().trim().optional(true).isString().notEmpty(), 
-        check("limite").escape().trim().optional(true).isInt({min:0}).notEmpty()
+        check("limite").escape().trim().optional(true).isInt({min:0}).notEmpty(),
+        check("selon").escape().trim().optional(true).isString().notEmpty(),
     ], 
     async(req,res)=>{
         try {
@@ -40,11 +42,12 @@ server.get(
                 return res.json({"message":"Données invalides", erreurs: validation})
             }
 
+            const selon = req.query.selon || "titre";
             const ordre = req.query.ordre || 'asc';
             const limite = parseInt(req.query.limite) || 100;
-            const references = await db.collection("films").orderBy("titre", ordre).limit(limite).get();
+            const references = await db.collection("films").orderBy(selon, ordre).limit(limite).get();
             const filmsTrouves =[];
-
+      
             references.forEach((doc)=>{
                 // const docData = doc.data();
                 // docData.id = doc.id;
@@ -52,6 +55,7 @@ server.get(
                 filmsTrouves.push(docData);
             })
 
+            console.log(filmsTrouves);
             // se nenhum filme for encontrado
             if(filmsTrouves.length == 0 ){
                 res.statusCode = 404;
@@ -68,7 +72,7 @@ server.get(
   }
 })
 
-
+// Pour ajouter un film à la base de données
 server.post(
     "/api/films", 
     [
@@ -130,22 +134,38 @@ try{
 
 
 // Pour mettre à jour les infos d'un film spécifique
-server.put("/api/films/:id", async(req, res) => {
-    try { 
-        const id = req.params.id;
-        const contenu = req.body;
-        const film = await db.collection("films").doc(id).update(contenu);
+server.put(
+    "/api/films/:id",
+    [
+        check("id").escape().trim().notEmpty().isString(), 
+        check("titre").escape().trim().notEmpty().isString().isLength({max: 100}),
+        check("genres").escape().trim().notEmpty().isString().isLength({max: 100}),
+        check("description").escape().trim().isArray({min:1}).notEmpty().isString(),
+        check("annee").escape().trim().notEmpty().matches("^[1-2][0-9]{3}"),
+        check("realisation").escape().trim().notEmpty().isString().isLength({max: 100}),
+        check("titreVignette").escape().trim().isString().notEmpty().matches("^.*\.(jpeg|jpg|png|gif|webp)$")
+    ],
+     async(req, res) => {
+        try { 
+            const id = req.params.id;
+            const contenu = req.body;
+            const film = await db.collection("films").doc(id).update(contenu);
 
-        return res.json({ message: `Le film avec l'id ${id} a été modifié` });
-    } catch(error) {
-        res.statusCode = 500;
-        return res.json({message: error.message});
-  }
+            return res.json({ message: `Le film avec l'id ${id} a été modifié` });
+        } catch(error) {
+            res.statusCode = 500;
+            return res.json({message: error.message});
+    }
 });
 
 
 // Pour deleter un filme de la base de données
-server.delete("/api/films/:id", async(req, res) => {
+server.delete(
+    "/api/films/:id", 
+    [
+        check("id").escape().trim().notEmpty().isString() 
+    ],
+    async(req, res) => {
 
     try {
         const id = req.params.id;
@@ -173,13 +193,13 @@ server.get("/api/utilisateurs", async (req, res) => {
             utilisateursTrouves.push(docData);
         })
     
-        // se nenhum user for encontrado
+        // if no user was found
         if(utilisateursTrouves.length == 0 ){
             res.statusCode = 404;
             return res.json({message: "Aucun utilisateur trouvé"})
         } 
     
-        // se deu tudo certo, aficha os dados
+        // if tiguidou, montrer les données
         res.statusCode = 200;
         return res.json(utilisateursTrouves);
     
@@ -207,14 +227,20 @@ server.get("/api/utilisateurs", async (req, res) => {
 // });
 
 
-// Pour faire s'inscrire dans le site
-server.post("/api/utilisateurs/inscription", async(req, res) => {
+// Pour s'inscrire dans le site
+server.post(
+    "/api/utilisateurs/inscription", 
+    [
+        check("courriel").escape().trim().notEmpty().isEmail(),
+        check("mdp").escape().trim().notEmpty() 
+    ], 
+    async(req, res) => {
     try{
         const data = req.body;
         const {courriel, mdp} = req.body;
         //vérifier si user exist
         const reference = await db.collection("utilisateurs").where("courriel", "==", courriel).get();
-        const utilisateursTrouves =[];
+        const utilisateursTrouves =[];    
 
         reference.forEach((doc)=>{
             const docData ={id:doc.id, ...doc.data()};
@@ -224,8 +250,14 @@ server.post("/api/utilisateurs/inscription", async(req, res) => {
         if(utilisateursTrouves.length > 0 ) {
             return res.json({"message" : "Le courriel existe déjà dans la base de données"});
         } else {
-            const nouveauUtilisateur = await db.collection("utilisateurs").add(data);
-            data.id = nouveauUtilisateur.id;
+
+            const hash = await bcrypt.hash(mdp, 10);
+            const utilisateur = {
+                courriel: courriel,
+                mdp: hash,
+            };
+        
+            const nouveauUtilisateur = await db.collection("utilisateurs").add(utilisateur);
             res.statusCode = 200;
             return res.json("ok");
         }
@@ -238,11 +270,17 @@ server.post("/api/utilisateurs/inscription", async(req, res) => {
 
 
 // Pour faire le login
-server.post("/api/utilisateurs/connexion", async (req, res) => {
-    try {
+server.post("/api/utilisateurs/connexion",
+    [
+        check("courriel").escape().trim().notEmpty().isEmail(),
+        check("mdp").escape().trim().notEmpty() 
+    ], 
+    async (req, res) => {
+        try {
         const {courriel, mdp} = req.body;
-        const reference = await db.collection("utilisateurs").where("courriel", "==", courriel).get();
 
+        //chercher dans la base de donnée si l'utilisateur existe
+        const reference = await db.collection("utilisateurs").where("courriel", "==", courriel).get();
         const utilisateursTrouves =[];
 
         reference.forEach((doc)=>{
@@ -250,16 +288,19 @@ server.post("/api/utilisateurs/connexion", async (req, res) => {
             utilisateursTrouves.push(docData);
         })
 
-        console.log(utilisateursTrouves);
         if(utilisateursTrouves.length > 0 ) {
             const userMDP = utilisateursTrouves[0].mdp;
             const compare = await bcrypt.compare(mdp, userMDP);
 
-            console.log(compare);
-
             if(compare) {
+                
+                delete utilisateursTrouves[0].mdp; //L'opérateur delete permet de supprimer une propriété d'un objet JS
+                const dataARenvoyer = {
+                courriel: utilisateursTrouves[0].courriel,
+                token: uuidv4(),
+                };
                 res.statusCode = 200;
-                return res.json("logged in");
+                return res.json(dataARenvoyer);
             } else {
                 return res.json({"message": "Le mot de passe ne concorde pas"});
             }

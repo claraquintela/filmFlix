@@ -45,6 +45,12 @@
               >https://four1f-tp1-claraquintela-1.onrender.com/api/films</a
             >
           </dd>
+          <dd>
+            <dt>Affiche les données</dt>
+              <dd>selon: titre || genre || annee || realisation</dd>
+              <dd>ordre : asc || desc</dd> 
+              <dd>limite : nombre integral</dd>
+          </dd>
         </dl>
 
         <dl>
@@ -62,6 +68,7 @@
 
             <pre>
               let film = {
+                id: "id",
                 titre: "titre",
                 description: "description",
                 annee: 2024,
@@ -146,13 +153,23 @@
         </dl>
 
         <dl>
-          <dt>Pour faire s'inscrire dans le site</dt>
+          <dt>Pour s'inscrire dans le site</dt>
           <dd>POST /api/utilisateurs/inscription</dd>
           <dd>
             <a
               href="https://four1f-tp1-claraquintela-1.onrender.com/api/utilisateurs/inscription"
               >https://four1f-tp1-claraquintela-1.onrender.com/api/utilisateurs/inscription</a
             >
+          </dd>
+          <dd>
+            Pametres requis: un objet utilisateur dans le corps de la rêquete:
+
+            <pre>
+              let utilisateur = {
+               courriel = "courriel",
+               mdp = "mdp"
+              }
+            </pre>
           </dd>
         </dl>
 
@@ -165,11 +182,16 @@
               >https://four1f-tp1-claraquintela-1.onrender.com/api/utilisateurs/connexion</a
             >
           </dd>
-        </dl>
+          <dd>
+            Pametres requis: un objet utilisateur dans le corps de la rêquete:
 
-        <dl>
-          <dt></dt>
-          <dd></dd>
+            <pre>
+              let utilisateur = {
+               courriel = "courriel",
+               mdp = "mdp"
+              }
+            </pre>
+          </dd>
         </dl>
       </section>
     </div>
