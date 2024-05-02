@@ -1,0 +1,11 @@
+À faire (frontend) 02/05/2024
+
+- Contenu statique Accueil (imprt json invés de copiar-colar dentro de Accueil.js)
+- Créer la route /filme/:id
+
+- link pour charque Tuilefilm
+    dica: key={index} vem dentro do link
+
+- Composant film
+- Commencer CSS
+- Route et composant 404

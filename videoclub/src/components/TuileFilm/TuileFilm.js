@@ -1,11 +1,16 @@
 
 import './TuileFilm.css';
 
-function TuileFilm() {
+function TuileFilm(props) {
+
+  console.log(props);
+
   return (
-    <div >
-    
-    </div>
+    <article>
+      <h3>{props.data.titre}</h3>
+      <p>{props.data.realisateur}</p>
+      <p>{props.data.annee}</p>
+    </article>
   );
 }
 
