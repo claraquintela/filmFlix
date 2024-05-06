@@ -1,0 +1,10 @@
+.entete {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-medium) 0;
+}
+
+.wrapper {
+    padding: 0 var(--space-medium);
+}

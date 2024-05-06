@@ -1,25 +1,32 @@
-
-import TuileFilm from '../TuileFilm/TuileFilm';
+import {useState, useEffect} from 'react';
+import TuileFilm from '../TuileFilm';
 import './ListeFilms.css';
+
 
 function ListeFilms() {
 
-  const listeFilms = [
-    { titre: "Star Wars", realisateur: "George Lucas", annee:"1979"},
-    { titre: "Star Wars", realisateur: "George Lucas", annee:"1979"},
-    { titre: "Star Wars", realisateur: "George Lucas", annee:"1979"},
-    { titre: "Star Wars", realisateur: "George Lucas", annee:"1979"}
-  ];
+const [listeFilms, setlisteFilms] = useState([]);
+const apiFilms = 'https://four1f-tp1-claraquintela-1.onrender.com/api/films';
 
-  const tuilesFilm = listeFilms.map((film, index)=>{
-    return <TuileFilm key={index} data={film} />
+useEffect(() => {
+
+  fetch(apiFilms)
+    .then(response => response.json())
+    .then(data => {setlisteFilms(data)} )
+
+}, [])
+
+  const tuilesFilm = listeFilms.map((film, index)=>{ 
+     return <TuileFilm key={index} data={film} />;
   })
 
   return (
     <main >
-      <h2> Liste de films</h2>
-      {tuilesFilm}
+
+      <h2> Liste de films</h2>     
+      {tuilesFilm} 
     </main>
+
   );
 }
 
