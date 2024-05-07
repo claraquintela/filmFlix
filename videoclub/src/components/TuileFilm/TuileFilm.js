@@ -7,7 +7,8 @@ export function TuileFilm(props) {
 
   return (
     <article>
-      <img src={`img/${props.data.titreVignette}`} alt={props.data.titreVignette}/>
+      <img src={`img/${props.data.titreVignette}`} alt={props.data.titreVignette} className='img-tuille'/>
+      <p>{props.data.titre}</p>
       <p>{props.data.realisateur}</p>
       <p>{props.data.annee}</p>
     </article>

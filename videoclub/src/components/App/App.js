@@ -4,6 +4,7 @@ import "./App.css";
 import Accueil from "../Accueil/Accueil";
 import ListeFilms from "../ListeFilms/ListeFilms";
 import TuileFilm from "../TuileFilm";
+import { Film } from "../Film/Film";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Accueil />}/>
         <Route path="/liste-films" element={<ListeFilms />}/>
-        <Route path="/film/:id" element={<TuileFilm />} />
+        <Route path="/film/:id" element={<Film />} />
       </Routes>
     </Router>
   );
