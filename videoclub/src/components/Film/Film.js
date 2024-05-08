@@ -5,16 +5,17 @@ import './Film.css';
 
 export function Film(props) {
 
+  //pour avoir l'id passé dans la query string
     const { id } = useParams();
     const [film, setfilm] = useState(null);
   
-    const urlFilm = 'https://four1f-tp1-claraquintela.onrender.com/api/films/${id}';
-
+    const urlFilm = `https://four1f-tp1-claraquintela-1.onrender.com/api/films/${id}`;
+    
     useEffect(() => {
       fetch(urlFilm)
         .then((response) => {
           if (!response.ok) {
-            throw new Error(Error `${response.statusText}`);
+            throw new Error(response.statusText);
           }
           return response.json();
         })
@@ -22,21 +23,25 @@ export function Film(props) {
           setfilm(data);
         })
         .catch((error) => {
-          console.error(error);
+          console.error('Fetch error:', error);
         });
-    }, [id]);
-  
+    }, [urlFilm, id]);
+    
     if (!film) {
-      return <div>donnés pas trouvés</div>;
+      return <div>Données pas trouvées</div>;
     }
-  
+
     return (
-      <div>
+      <div className="page-film">
         <h1>{film.titre}</h1>
-        <img src={`/img/${film.titreVignette}`} alt={film.titre} />
-        <p>Réealisateur: {film.realisateur}</p>
-        <p>Année: {film.annee}</p>
-        <p>Description: {film.description}</p>
+        <div className="page-film_wrapper">
+          <img src={`/img/${film.titreVignette}`} alt={film.titre} />
+          <div className="page-film_content">
+          <p><span>Réealisateur:</span> {film.realisateur}</p>
+          <p><span>Année:</span> {film.annee}</p>
+          <p><span>Description:</span> {film.description}</p>
+          </div>
+        </div>
       </div>
     );
   }

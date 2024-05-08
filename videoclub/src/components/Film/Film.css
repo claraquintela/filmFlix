@@ -1,0 +1,23 @@
+.page-film {
+    align-items: center;
+    display: block;
+    justify-content: center;
+    max-width: 80%;
+    padding: 4rem;
+}
+
+.page-film_wrapper {
+    display: flex;
+}
+
+.page-film_content {
+    padding: 2rem;
+}
+
+.page-film_content span {
+    font-weight: 800;
+}
+
+.page-film img {
+   max-width: 30%;
+}

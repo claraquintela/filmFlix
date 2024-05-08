@@ -19,7 +19,7 @@ useEffect(() => {
 
   const tuilesFilm = listeFilms.map((film, index) => ( 
   <Link to ={`/film/${film.id}`} key={film.id} >
-      <TuileFilm  data={film} />;
+      <TuileFilm  data={film} />
     </Link>
   ));
 
