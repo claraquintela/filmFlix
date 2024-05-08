@@ -32,17 +32,20 @@ export function Film(props) {
     }
 
     return (
+      <main>
       <div className="page-film">
-        <h1>{film.titre}</h1>
+        
         <div className="page-film_wrapper">
           <img src={`/img/${film.titreVignette}`} alt={film.titre} />
           <div className="page-film_content">
-          <p><span>Réealisateur:</span> {film.realisateur}</p>
-          <p><span>Année:</span> {film.annee}</p>
-          <p><span>Description:</span> {film.description}</p>
+            <h2>{film.titre}</h2>
+            <p><span>Directed by</span> {film.realisateur}</p>
+            <p><span>Year:</span> {film.annee}</p>
+            <p><span>Description:</span> {film.description}</p>
           </div>
         </div>
       </div>
+      </main>
     );
   }
   

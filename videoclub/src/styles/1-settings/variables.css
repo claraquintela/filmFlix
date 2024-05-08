@@ -1,6 +1,5 @@
 :root{
     --space-base: max(5px, 1vw);
-
     --space-xsmall: calc(var(--space-base) * 2.5);
     --space-small: calc(var(--space-base)* 5);
     --space-medium: calc(var(--space-base)* 7);

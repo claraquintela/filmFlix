@@ -14,3 +14,10 @@
     max-width: 80%;
     border-radius: 100%;
 }
+
+.menu-nav-item{
+    font-size: 2rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--zomp);
+}

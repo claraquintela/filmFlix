@@ -5,9 +5,9 @@ function Entete() {
     return (
     <header className="entete">
       <div className="wrapper">
-        <img src="img\filmflix_logo.png" alt="logo" className="entete-logo"/>
+        <img src="img\filmflix_logo_t.png" alt="logo" className="entete-logo"/>
         <nav>
-          <NavLink to='liste-films'>Liste des films </NavLink>
+          <NavLink to='liste-films' className="menu-nav-item">Collection</NavLink>
         </nav>
       </div>
     </header>

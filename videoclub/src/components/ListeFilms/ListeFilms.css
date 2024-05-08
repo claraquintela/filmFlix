@@ -1,0 +1,23 @@
+.collection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -6rem;
+    margin-bottom: 4rem;
+
+    & h1{
+        color: var(--icterine);
+        margin-bottom: 4rem;
+        text-shadow: 0px 2px 2px #172832;
+    }
+}
+
+.collection-tuiles{
+   
+   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}

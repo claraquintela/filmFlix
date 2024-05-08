@@ -24,9 +24,12 @@ useEffect(() => {
   ));
 
   return (
-    <main >
-      <h2> Liste de films</h2>     
-      {tuilesFilm} 
+    <main className='collection'>
+      <h1>Browse our collection</h1> 
+
+      <div className='collection-tuiles'>    
+      {tuilesFilm}
+      </div> 
     </main>
 
   );

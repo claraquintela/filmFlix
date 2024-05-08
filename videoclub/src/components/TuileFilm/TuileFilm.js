@@ -6,11 +6,12 @@ export function TuileFilm(props) {
   console.log(props);
 
   return (
-    <article>
+    <article className='tuille-film'>
       <img src={`img/${props.data.titreVignette}`} alt={props.data.titreVignette} className='img-tuille'/>
       <p>{props.data.titre}</p>
-      <p>{props.data.realisateur}</p>
-      <p>{props.data.annee}</p>
+      <p>({props.data.annee})</p>
+      <p>Directed by {props.data.realisation}</p>
+     
     </article>
   );
 }
