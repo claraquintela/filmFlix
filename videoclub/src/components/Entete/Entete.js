@@ -1,10 +1,11 @@
-import { NavLink } from "react-router-dom";  
+import { NavLink } from "react-router-dom"; 
+import './Entete.css'
 
 function Entete() {
     return (
     <header className="entete">
-      <div className="WRAPPER">
-        <h1>FilmFlix</h1>
+      <div className="wrapper">
+        <img src="img\filmflix_logo.png" alt="logo" className="entete-logo"/>
         <nav>
           <NavLink to='liste-films'>Liste des films </NavLink>
         </nav>
@@ -13,4 +14,4 @@ function Entete() {
     );
   }
   
-  export default Entete;
+  export default Entete;   
