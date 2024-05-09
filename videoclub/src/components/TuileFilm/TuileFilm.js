@@ -3,8 +3,6 @@ import './TuileFilm.css';
 
 export function TuileFilm(props) {
 
-  console.log(props);
-
   return (
     <article className='tuille-film'>
       <img src={`img/${props.data.titreVignette}`} alt={props.data.titreVignette} className='img-tuille'/>

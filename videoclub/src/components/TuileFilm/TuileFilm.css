@@ -1,4 +1,6 @@
 .tuille-film{
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 4rem 1rem 1rem 1rem;
@@ -8,13 +10,14 @@
     -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
     box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
     padding: 2rem;
+    width: 20rem;
    
     & h3 {
         color: var(--icterine);;
     }
 
     & img {
-        max-width: 18rem;
+        width: 16rem;
         border-radius: 1rem;
         -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
         -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
