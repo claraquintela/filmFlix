@@ -6,3 +6,29 @@ Cours 8 (Router)
 - Link (react-router-dom) pour chaque <TuileFilm /> (ref : https://knowbody.github.io/react-router-docs/api/Link.html)
 - Composant Film
 - Commencer votre CSS
+
+Cours 9 (Données dynamiques)
+- Dynamiser la page d'un film (useParams, ref : https://reactrouter.com/en/main/hooks/use-params)
+- Ajouter un séparateur entre les genres du tableau de genres d'un film
+- Mise en page composants et interactivité
+
+Cours 10 (Filtres)
+- Les autres filtres (une seule fonction), soit :
+	- 'Titre alphabétique (A-Z)'
+	- 'Titre alphabétique (Z-A)'
+	- 'Réalisateur alphabétique (A-Z)'
+	- 'Réalisateur alphabétique (Z-A)'
+	- 'Par année (du plus récent)'
+	- 'Par année (du plus ancien)'
+- Query string 
+	- orderBy
+		- titre
+		- realisation
+		- annee
+	- orderDirection
+		- asc
+		- desc
+- Créer un composant Filtre
+- Afficher filtre actif
+- Par défaut, la tuile d'un film affiche l'image et le titre du film, afficher le réalisateur ou l'année si cette information est filtrée
+- (bonus) Injecter les filtres à partir d'un tableau

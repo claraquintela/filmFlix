@@ -3,10 +3,10 @@ import Entete from "../Entete/Entete";
 import "./App.css";
 import Accueil from "../Accueil/Accueil";
 import ListeFilms from "../ListeFilms/ListeFilms";
-import TuileFilm from "../TuileFilm";
 import { Film } from "../Film/Film";
 
 function App() {
+
   return (
     <Router>
       <Entete />
