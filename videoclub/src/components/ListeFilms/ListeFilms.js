@@ -3,24 +3,29 @@ import TuileFilm from '../TuileFilm';
 import { Link } from 'react-router-dom';
 import './ListeFilms.css';
 import Dropdown from '../Filtre/Filtre';
+import { motion } from "framer-motion";
 
 
 function ListeFilms() {
 
 const [listeFilms, setListeFilms] = useState([]);
-const apiFilms = 'https://four1f-tp1-claraquintela-1.onrender.com/api/films'
+const apiFilms = 'https://apifilm-4kgi.onrender.com/films'
 const [urlFiltre, setUrlFiltre] = useState(apiFilms); 
+const [estCharge, setEstCharge] = useState(false);
 
 useEffect(() => {
 
   fetch(urlFiltre)
     .then(response => response.json())
-    .then(data => {setListeFilms(data)} )
+    .then(data => {
+      setListeFilms(data);
+      setEstCharge(true);
+    } )
 
 }, [urlFiltre])
 
   const tuilesFilm = listeFilms.map((film, index) => ( 
-    <Link to ={`/film/${film.id}`} key={film.id} >
+    <Link to ={`/films/${film.id}`} key={film.id} >
         <TuileFilm  data={film} />
     </Link>
   ));
@@ -57,11 +62,21 @@ useEffect(() => {
     setUrlFiltre(`${apiFilms}${queryString}`)
   }
 
+  function testJest(e){
+    e.target.textContent = 'Test';
+  }
+
+  const transition = { duration: 1.5, ease: "easeInOut" };
+  const animationBasVersHaut = {
+    hidden: { opacity: 0, y: 25 },
+    visible: { opacity: 1, y: 0, transition },
+    exit: { opacity: 0, y: 25, transition },
+  };
 
   return (
     <main className='collection'>
 
-      <h1>Browse our collection</h1> 
+      <h1 data-testid='titre' onClick={testJest}>Browse our collection</h1> 
 
       <Dropdown 
         label="Refine your seach"
@@ -73,7 +88,17 @@ useEffect(() => {
       />
 
       <div className='collection-tuiles'>    
-      {tuilesFilm}
+      {estCharge ? (
+        <motion.div
+          key="liste-film"
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          variants={animationBasVersHaut}
+        >
+          {tuilesFilm}
+        </motion.div>
+      ) : ( "" )}
       </div> 
     </main>
 
