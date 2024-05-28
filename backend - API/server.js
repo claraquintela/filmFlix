@@ -5,10 +5,12 @@ const path = require("path");
 const server = express();
 const cors = require("cors");
 const bcrypt = require("bcrypt"); // Para inscriptar o mdp
+const jwt = require("jsonwebtoken");
 const {check, validationResult, body, param, query}= require("express-validator"); // essa biblioteca tem funções de base para validar dados inputados no frontend
 const { v4: uuidv4 } = require('uuid');
 // conexão com a base de dados
 const db = require("./data/db");
+const auth = require("./middlewares/auth")
 
 
 //Doit être défini au début de l'application
@@ -75,6 +77,7 @@ server.get(
 // Pour ajouter un film à la base de données
 server.post(
     "/api/films", 
+    auth,
     [
         check("titre").escape().trim().notEmpty().isString().isLength({max: 100}),
         check("genres").escape().trim().notEmpty().isString().isLength({max: 100}),
@@ -287,21 +290,28 @@ server.post("/api/utilisateurs/connexion",
             const docData ={id:doc.id, ...doc.data()};
             utilisateursTrouves.push(docData);
         })
+        const utilisateur = utilisateursTrouves[0];
 
         if(utilisateursTrouves.length > 0 ) {
             const userMDP = utilisateursTrouves[0].mdp;
             const compare = await bcrypt.compare(mdp, userMDP);
 
             if(compare) {
-                
-                delete utilisateursTrouves[0].mdp; //L'opérateur delete permet de supprimer une propriété d'un objet JS
-                const dataARenvoyer = {
-                courriel: utilisateursTrouves[0].courriel,
-                token: uuidv4(),
+                const donneesJeton= {
+                    id: utilisateur.id,
+                    courriel: utilisateur.courriel
                 };
+
+                const options = {
+                    expiresIn: "1d",
+                }
+
+                const jeton = jwt.sign(donneesJeton, process.env.JWT_SECRET, options);
+
                 res.statusCode = 200;
-                return res.json(dataARenvoyer);
+                return res.json(jeton);
             } else {
+                res.statusCode = 400;
                 return res.json({"message": "Le mot de passe ne concorde pas"});
             }
          }
