@@ -1,9 +1,9 @@
 import {useContext} from 'react';
 import { AppContext } from "../App/App";
 import { NavLink } from "react-router-dom"; 
-import './Entete.css'
+import './Entete.css';
 
-function Entete(props) {
+function Entete({handleLogin, handleLogout}) {
 
   const context = useContext(AppContext);
 
@@ -13,14 +13,18 @@ function Entete(props) {
         <img src="\img\filmflix_logo_t.png" alt="logo" className="entete-logo"/>
         <nav>
           <NavLink to='liste-films' className="menu-nav-item">Collection</NavLink>
-          {context.isLogged ? <NavLink to='admin'>Admin</NavLink> : ''}
+          {context.isLogged ? 
+            (<button onClick={handleLogout}>Déconnexion</button>)
+          :
+          ( <form onSubmit={handleLogin}>
+            <input type="email" name="courriel" placeholder="E-mail"/>
+            <input type="password" name="mdp" placeholder="Password"/>
+            <button>Login</button>
+          </form>)
+          }
         </nav>
       </div>
-      <form onSubmit={props.handleLogin}>
-        {/* <input ref={elUser} type="text" name="user" placeholder="User"/> */}
-        <input type="text" name="user" placeholder="User"/>
-        <button>Login</button>
-      </form>
+     
     </header>
     );
   }

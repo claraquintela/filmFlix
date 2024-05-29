@@ -33,27 +33,27 @@ useEffect(() => {
 
   const filters = [
     { item: 'Year (asc)',
-      thisQuery: "?ordre=asc&selon=annee"
+      thisQuery: "?orderDirection=asc&orderBy=annee"
     },
     {
       item:'Year (desc)',
-      thisQuery: "?ordre=desc&selon=annee"
+      thisQuery: "?orderDirection=desc&orderBy=annee"
     },
     {
       item:'Director (A-Z)',
-      thisQuery: "?ordre=asc&selon=realisation"
+      thisQuery: "?orderDirection=asc&orderBy=realisation"
     },
     {
       item: 'Director (Z-A)',
-      thisQuery: "?ordre=desc&selon=realisation"
+      thisQuery: "?orderDirection=desc&orderBy=realisation"
     },
     {
       item:'Movie (A-Z)',
-      thisQuery: "?ordre=asc&selon=titre"
+      thisQuery: "?orderDirection=asc&orderBy=titre"
     },
     {
       item: 'Movie (Z-A)',
-      thisQuery: "?ordre=desc&selon=titre"
+      thisQuery: "?orderDirection=desc&orderBy=titre"
     }     
   ]
 
