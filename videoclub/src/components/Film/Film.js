@@ -5,9 +5,7 @@ import StarRating from "../StarRating/StarRating";
 import { AppContext } from "../App/App";
 
 
-
 export function Film(props) {
-
 
   const context =useContext(AppContext)
   //pour avoir l'id passé dans la query string
@@ -107,14 +105,6 @@ export function Film(props) {
             console.log(data);
           })
 
-        /*
-        let [putResponse, getResponse] = await Promise.all([putCommentaire, getFilm]);
-        let data = await getResponse.json();
-
-        setFilm(prevData => ({ ...prevData, Commentaires: data.Commentaires }));
-
-        console.log(data);
-        */
       } catch (error) {
         console.error('error:', error);
       }
@@ -128,20 +118,41 @@ export function Film(props) {
       </form>
     }
 
-
     if (!film) {
       return <div>Données pas trouvées</div>;
     }
 
+    function averageGrade(arr) {
+
+      if(arr === undefined)
+        { 
+          return 0
+        }
+      
+      let sum = 0;
+      for (let i = 0; i < arr.length; i++) {
+
+        sum += arr[i];
+      }
+      const average = sum / arr.length;
+
+      return average;
+    }
+;
 
     return (
       <main>
         <div className="page-film">
           <div className="page-film_wrapper">
+           
             <img src={`/img/${film.titreVignette}`} alt={film.titre} />
             <div className="page-film_content">
               <h2>{film.titre}</h2>
-              <StarRating rating={rating} setRating={setRating}/>
+              <div className="rating">
+                <StarRating rating={rating} setRating={setRating}/>
+                <p><span>Rating:</span> {averageGrade(film.notes) || 0}</p>
+              </div>
+             
               <p><span>Directed by</span> {film.realisateur}</p>
               <p><span>Year:</span> {film.annee}</p>
               <p><span>Description:</span> {film.description}</p>
