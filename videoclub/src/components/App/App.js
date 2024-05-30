@@ -90,21 +90,18 @@ function App() {
 
   return (
     <AppContext.Provider value={user}>
-      <Entete user={user.usager} handleLogin={login} handleLogout={logout}/>
+      {location.pathname !== "/" && <Entete user={user.usager} handleLogin={login} handleLogout={logout}/>}
       <AnimatePresence mode="wait">
-
-      <Routes location={location} key={location.key}>
-        
-        <Route path="/" element={<Accueil />}/>
-        <Route path="/liste-films" element={<ListeFilms />}/>
-        <Route path="/films/:id" element={<Film />} />
-        <Route path='/admin' element={user.isLogged ? <Admin/> : <Navigate to='/' />}/>
-    
-      </Routes>
-   
+        <Routes location={location} key={location.key}>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/liste-films" element={<ListeFilms />} />
+          <Route path="/films/:id" element={<Film />} />
+          <Route path='/admin' element={user.isLogged ? <Admin/> : <Navigate to='/' />} />
+        </Routes>
       </AnimatePresence>
     </AppContext.Provider>
   );
+  
 }
 
 export default App;

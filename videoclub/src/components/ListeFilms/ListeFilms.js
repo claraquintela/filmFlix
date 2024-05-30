@@ -57,11 +57,9 @@ useEffect(() => {
     }     
   ]
 
-
   function filtres(queryString){
     setUrlFiltre(`${apiFilms}${queryString}`)
   }
-
 
   const transition = { duration: 1.5, ease: "easeInOut" };
   const animationBasVersHaut = {
@@ -96,7 +94,6 @@ useEffect(() => {
         </motion.div>
       ) : ( <Loading/>)}
 
-     
     </main>
 
   );

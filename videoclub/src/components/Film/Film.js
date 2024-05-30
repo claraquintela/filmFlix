@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import './Film.css';
 import StarRating from "../StarRating/StarRating";
 import { AppContext } from "../App/App";
-import { NavLink } from "react-router-dom"; 
+
 
 
 export function Film(props) {
@@ -48,6 +48,7 @@ export function Film(props) {
         updateNote();
     }, [rating]);
   
+
     async function soumettreNote() {
       let aNotes = film.notes ? [...film.notes, rating] : [rating];
   
@@ -63,7 +64,7 @@ export function Film(props) {
         let putNote = await fetch(urlFilm, oOptions);
         let getFilm = await fetch(urlFilm);
   
-        let [putResponse, getResponse] = await Promise.all([putNote, getFilm]);
+        let [getResponse] = await Promise.all([putNote, getFilm]);
         let data = await getResponse.json();
 
         setFilm(prevData => ({ ...prevData, notes: data.notes }));
@@ -72,14 +73,12 @@ export function Film(props) {
       }
     }
 
+    //functions to manage comments
     async function onSubmitComment(e) {
       e.preventDefault();
 
       let aCommentaires;
       let comment = e.target.commentaire.value;
-      console.log(comment);
-
-      // aCommentaires = film.commentaires ? (prevCommentaire => ([...prevCommentaire, comment])): [{commentaires:comment , auteur:context.nom}];
   
       if(!film.commentaires){
         aCommentaires=[{commentaires:comment, autor:context.nom}]
@@ -103,22 +102,52 @@ export function Film(props) {
         Promise.all([putCommentaire, getFilm])
         	.then(response => response[1].json())
           .then(data => {
-            console.log(data);
+            setComments(data);
+            // e.currentTarget.reset();
           })
 
       } catch (error) {
         console.error('error:', error);
       }
+      // e.currentTarget.reset();
     }
+
+    //update comment 
+    useEffect(() => {
+      async function updateComment() {
+        if (comments > 0) {
+          await onSubmitComment();
+        }
+      }
+      updateComment();
+      
+    }, [comments]);
+  
+    //Show all comments associated with this movie
+    let commentsMovie = film.commentaires;
+    let blockComment =[];
   
     //Ajouter form comment à la page
-    let blockAddComment = "";
+    let blockAddComment ; 
+
     if(context.isLogged) {
-      blockAddComment =
-      <form onSubmit={onSubmitComment} className="form-comment">
-        <textarea name="commentaire" placeholder="Enter your comment"></textarea>
-        <button>Submit</button>
-      </form>
+      if (commentsMovie) {
+        blockComment = commentsMovie.map((comment, index) => (
+        <p key={index}>"{comment.commentaires}"</p>
+      ));
+      } else {
+        blockComment = <span>No comments yet. Be the first to write a comment about this movie</span>
+      }
+      
+    
+       blockAddComment =
+       <div className="all-comments">
+          <h3>Write a comment</h3>
+          <form onSubmit={(e) => onSubmitComment(e)} className="form-comment">
+            <textarea name="commentaire" placeholder="Enter your comment"></textarea>
+            <button>Submit</button>
+          </form>
+      </div>
     }
 
     //recevoir les commentaires de la db
@@ -150,10 +179,13 @@ export function Film(props) {
             <img src={`/img/${film.titreVignette}`} alt={film.titre} />
             <div className="page-film_content">
               <h2>{film.titre}</h2>
-              <div className="rating">
-                <StarRating rating={rating} setRating={setRating}/>
-                <p><span>Rating:</span> {averageGrade(film.notes) || 0}</p>
-              </div>
+
+              {context.isLogged ?
+                (<div className="rating">
+                  <StarRating rating={rating} setRating={setRating}/>  
+                </div>) :  ""
+              }
+              <p><span>Rating:</span> {averageGrade(film.notes) || 0}</p>
               <p><span>Directed by</span> {film.realisateur}</p>
               <p><span>Year:</span> {film.annee}</p>
               <p><span>Description:</span> {film.description}</p>
@@ -161,8 +193,13 @@ export function Film(props) {
             </div>   
           </div>
         </div>
+
         <div className="comments">
-        {blockAddComment}
+          <div className="all-comments">
+              <h3>Comments</h3>
+              {blockComment}
+            </div>
+          {blockAddComment}
         </div>
       </main>
     );
