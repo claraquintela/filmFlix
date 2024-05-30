@@ -16,8 +16,8 @@
 /*UTILITIES*/
 
 body{
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 14%, rgba(23,40,50,1) 66%, rgba(75,87,101,1) 96%);
+    background: rgb(26,26,38);
+    background: linear-gradient(90deg, rgba(26,26,38,1) 31%, rgba(22,23,38,1) 59%, rgba(6,9,39,1) 82%, rgba(44,52,61,1) 100%);
 }
 
 main {

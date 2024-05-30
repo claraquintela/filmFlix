@@ -3,26 +3,33 @@ import { AppContext } from "../App/App";
 import { NavLink } from "react-router-dom"; 
 import './Entete.css';
 
-function Entete({handleLogin, handleLogout}) {
+function Entete({handleLogin, handleLogout, user}) {
 
   const context = useContext(AppContext);
 
     return (
-    <header className="entete">
-      <div className="wrapper">
-        <img src="\img\filmflix_logo_t.png" alt="logo" className="entete-logo"/>
-        <nav>
-          <NavLink to='liste-films' className="menu-nav-item">Collection</NavLink>
-          {context.isLogged ? 
-            (<button onClick={handleLogout}>Déconnexion</button>)
+    <header >
+      <div>
+        {context.isLogged ? 
+          (
+            <button onClick={handleLogout} className='logout-form'>Déconnexion</button>
+          )
           :
-          ( <form onSubmit={handleLogin}>
+          ( <form className='login-form' onSubmit={handleLogin}>
             <input type="email" name="courriel" placeholder="E-mail"/>
             <input type="password" name="mdp" placeholder="Password"/>
             <button>Login</button>
           </form>)
           }
-        </nav>
+       </div>  
+      <div className="wrapper">
+      <div>
+      <NavLink to='liste-films'><img src="\img\filmflix_logo_t.gif" alt="logo" className="entete-logo"/></NavLink>
+        </div>
+       <div>
+          <NavLink to='liste-films' className="menu-nav-item">Collection</NavLink>
+          </div>
+        
       </div>
      
     </header>

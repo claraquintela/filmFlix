@@ -3,18 +3,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 4rem 1rem 1rem 1rem;
-    background-color: var(--paynes-gray);
     border-radius: 1rem;
-    -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
-    -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
-    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
-    padding: 2rem;
-    width: 20rem;   
-    transition: opacity 0.6s ease;
+    padding: 1rem;
+    margin: 5rem 0 2rem 0;
+    max-width: 15rem;
+    height: 20rem;
+    transition: all 0.6s ease;
 
-    & article:hover > :not(:hover) {
-        opacity:0.4;
+    .tuille-film:hover > :not(:hover) {
+        opacity: 0.4;
     }
    
     & h3 {
@@ -22,13 +19,25 @@
     }
 
     & img {
-        width: 16rem;
+        width: 100%;
         border-radius: 1rem;
         -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
         -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
         box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.82);
+        transition: width 2s;
     }
 
-
+    & .tuille-film-content{
+        display: none;
+        transition: all 0.6s ease;
+    }
+    
+    & img:hover{
+        width:110%;
+        }
+    & img:hover + .tuille-film-content {
+        display: block;
+    }
 }
+
 

@@ -2,8 +2,9 @@ import {useState, useEffect} from 'react';
 import TuileFilm from '../TuileFilm';
 import { Link } from 'react-router-dom';
 import './ListeFilms.css';
-import Dropdown from '../Filtre/Filtre';
+import Filtre from '../Filtre/Filtre';
 import { motion } from "framer-motion";
+import Loading from '../Loading/Loading';
 
 
 function ListeFilms() {
@@ -29,7 +30,6 @@ useEffect(() => {
         <TuileFilm  data={film} />
     </Link>
   ));
-
 
   const filters = [
     { item: 'Year (asc)',
@@ -62,9 +62,6 @@ useEffect(() => {
     setUrlFiltre(`${apiFilms}${queryString}`)
   }
 
-  function testJest(e){
-    e.target.textContent = 'Test';
-  }
 
   const transition = { duration: 1.5, ease: "easeInOut" };
   const animationBasVersHaut = {
@@ -76,9 +73,8 @@ useEffect(() => {
   return (
     <main className='collection'>
 
-      <h1 data-testid='titre' onClick={testJest}>Browse our collection</h1> 
 
-      <Dropdown 
+      <Filtre
         label="Refine your seach"
         name="filter"
         list={filters}
@@ -86,8 +82,6 @@ useEffect(() => {
         whenChanged={lien => filtres(lien) 
         }
       />
-
-      <div className='collection-tuiles'>    
       {estCharge ? (
         <motion.div
           key="liste-film"
@@ -96,10 +90,13 @@ useEffect(() => {
           exit="exit"
           variants={animationBasVersHaut}
         >
-          {tuilesFilm}
+          <div className='collection-tuiles'>    
+            {tuilesFilm}
+          </div> 
         </motion.div>
-      ) : ( "" )}
-      </div> 
+      ) : ( <Loading/>)}
+
+     
     </main>
 
   );

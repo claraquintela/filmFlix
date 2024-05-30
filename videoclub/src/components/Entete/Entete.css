@@ -1,23 +1,80 @@
-.entete {
-    display: flex;
-    align-items: center;
-    margin-top: -6rem;
-}
 
 .wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    margin: 2rem 22.5rem;
+    border-bottom: #fff762 1px dotted;
 }
 
 .entete-logo{
-    max-width: 80%;
+    max-width: 40%;
     border-radius: 100%;
 }
 
 .menu-nav-item{
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 700;
     text-decoration: none;
     color: var(--zomp);
+    margin: 0 1rem 0 1rem;
+    transition: all 1s;
+}
+
+.menu-nav-item:hover{
+    text-shadow: 2px 2px 2px #fff762;
+}
+
+.login-form {
+    display: flex;
+    width: 20rem;
+    margin: 0 auto;
+    padding: 2rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+}
+
+/* Estilo para os campos de entrada */
+
+.login-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #4B5765;
+    border-radius: 3px;
+    margin-right: 0.5rem;
+    background-color: #4B5765;
+    color: #fff;
+   
+
+}
+
+
+.login-form button {
+    width: 20%;
+    padding: 5px;
+    background-color: var(--zomp);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #4B5765;
+}
+
+.logout-form{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--zomp);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+   margin: 1rem;
+    padding: 8px;
+    
 }

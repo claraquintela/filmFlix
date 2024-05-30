@@ -1,24 +1,28 @@
 .dropdown {
-    display: block;
-    margin: 8px;
-    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    font-size: 1rem;
     justify-content: center;
+    align-items: center;
 }
 
 .dropdown select {
-    background-color: #fff;
+    background-color: #4B5765;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
-    width: 100%;
+    width: 80%;
     border: none;
-    font-size: 24px;
-    padding: 24px;
+    font-size: 0.8rem;
+    padding: 0.6rem;
     box-sizing: border-box;
     border-radius: 20px;
-    margin: 2rem;
+    margin: 1rem;
+    color:#fff762;
 }
 
 label {
-    color: var(--icterine)
+    color: var(--zomp);
+    font-weight: 800;
 }
 
 

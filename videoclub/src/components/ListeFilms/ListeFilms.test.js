@@ -40,8 +40,6 @@ describe('Composant ListeFilms', () => {
 
     });
 
-
-
     test('Vérifie le click sur le titre', () => {
 
         render(<ListeFilms/>);
@@ -51,13 +49,7 @@ describe('Composant ListeFilms', () => {
 
     });
 
-
-
     test('Vérifie la tuile d\'un film', () => {
-
-
-
-
 
     });
 

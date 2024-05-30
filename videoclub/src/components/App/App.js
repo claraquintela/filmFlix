@@ -90,7 +90,7 @@ function App() {
 
   return (
     <AppContext.Provider value={user}>
-      <Entete handleLogin={login} handleLogout={logout}/>
+      <Entete user={user.usager} handleLogin={login} handleLogout={logout}/>
       <AnimatePresence mode="wait">
 
       <Routes location={location} key={location.key}>
