@@ -12,6 +12,21 @@ const { v4: uuidv4 } = require('uuid');
 const db = require("./data/db");
 const auth = require("./middlewares/auth")
 
+// Package permettant d'enregister l'image
+const multer = require("multer");
+
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "public/assets/images");
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.originalname);
+    },
+});
+let upload = multer({
+    storage: storage,
+});
+
 
 //Doit être défini au début de l'application
 const dotenv = require("dotenv");
@@ -181,6 +196,16 @@ server.delete(
       }
 });
 
+server.post("/api/films/upload-image", auth, upload.single("image"), (req, res) => {
+        try {
+            console.log(req.body, req.file);
+            res.statusCode == 200;
+            return res.json({ message: "L'image a été enregistrée" });
+        } catch (erreur) {
+            res.statusCode = 500;
+            return res.json({ message: "Une erreur est survenue lors de l'enregistrement de l'image" });
+        }
+    });
 
 
 ///////////////////////////////////////////// UTILISATEURS ////////////////////////////////////////////////////////
