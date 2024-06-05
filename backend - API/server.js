@@ -80,8 +80,8 @@ server.post(
     auth,
     [
         check("titre").escape().trim().notEmpty().isString().isLength({max: 100}),
-        check("genres").escape().trim().notEmpty().isString().isLength({max: 100}),
-        check("description").escape().trim().isArray({min:1}).notEmpty().isString(),
+        check("genres").escape().trim().notEmpty().isArray().isLength({max: 100}),
+        check("description").escape().trim().isString({min:1}).notEmpty().isString(),
         check("annee").escape().trim().notEmpty().matches("^[1-2][0-9]{3}"),
         check("realisation").escape().trim().notEmpty().isString().isLength({max: 100}),
         check("titreVignette").escape().trim().isString().notEmpty().matches("^.*\.(jpeg|jpg|png|gif|webp)$") //middleware

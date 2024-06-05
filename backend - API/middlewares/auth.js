@@ -1,16 +1,17 @@
-const db = require(".../config/db");
+const db = require("../data/db");
 const jwt = require("jsonwebtoken");
 
 
 const auth = async (req, res, next) => {
    try {
-      const authorization = req.header.authorization;
+      const authorization = req.headers.authorization;
       // vérifier le token
       if(authorization) {
          //exemple: jeton = "Bearer ksifuhsjdmnhndsbmjfmhsnbdjshcf"
-         const jetonAValider = authorization.spli(" ")[1]
+         const jetonAValider = authorization.split (" ")[1]
          const jetonDecoded = jwt.verify(jetonAValider, process.env.JWT_SECRET);     // valide le jeton
-         const utilisateurVerifie = await db.colletion("utilisateurs").doc(jetonDecoded.id)  //récupère l'utilisateur dans le jeton (il exist?)
+         const utilisateurVerifie = await db.collection("utilisateurs").doc(jetonDecoded.id).get()  //récupère l'utilisateur dans le jeton (il exist?)
+         
          if(utilisateurVerifie.exists){
             next();
          } else {

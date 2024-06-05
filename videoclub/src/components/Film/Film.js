@@ -64,7 +64,7 @@ export function Film(props) {
         let putNote = await fetch(urlFilm, oOptions);
         let getFilm = await fetch(urlFilm);
   
-        let [getResponse] = await Promise.all([putNote, getFilm]);
+        let [putResponse, getResponse] = await Promise.all([putNote, getFilm]);
         let data = await getResponse.json();
 
         setFilm(prevData => ({ ...prevData, notes: data.notes }));
@@ -103,13 +103,14 @@ export function Film(props) {
         	.then(response => response[1].json())
           .then(data => {
             setComments(data);
-            // e.currentTarget.reset();
+            //Clear form
+            e.target.reset();
           })
 
       } catch (error) {
         console.error('error:', error);
       }
-      // e.currentTarget.reset();
+  
     }
 
     //update comment 
@@ -186,10 +187,9 @@ export function Film(props) {
                 </div>) :  ""
               }
               <p><span>Rating:</span> {averageGrade(film.notes) || 0}</p>
-              <p><span>Directed by</span> {film.realisateur}</p>
+              <p><span>Directed by</span> {film.realisation}</p>
               <p><span>Year:</span> {film.annee}</p>
               <p><span>Description:</span> {film.description}</p>
-              {/* <button onClick={soumettreNote}>Note</button> */}
             </div>   
           </div>
         </div>

@@ -9,6 +9,7 @@ import ListeFilms from "../ListeFilms/ListeFilms";
 import Admin from "../Admin/Admin";
 import { Film } from "../Film/Film";
 import {jwtDecode} from "jwt-decode";
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 export const AppContext = React.createContext();
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
       usager:{}
     }
     setUser(userData);
-  },[])
+  },[])
 
   async function login(e){
     e.preventDefault();
@@ -93,10 +94,15 @@ function App() {
       {location.pathname !== "/" && <Entete user={user.usager} handleLogin={login} handleLogout={logout}/>}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.key}>
+
+          <Route element={<PrivateRoute/>}>
+            <Route path='/admin' element={<Admin/>} />
+          </Route>
+
           <Route path="/" element={<Accueil />} />
           <Route path="/liste-films" element={<ListeFilms />} />
           <Route path="/films/:id" element={<Film />} />
-          <Route path='/admin' element={user.isLogged ? <Admin/> : <Navigate to='/' />} />
+
         </Routes>
       </AnimatePresence>
     </AppContext.Provider>
