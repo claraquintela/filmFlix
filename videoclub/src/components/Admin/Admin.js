@@ -17,7 +17,7 @@ function Admin () {
             "realisation": form.realisation.value,
             "description": form.description.value,
             "annee": form.annee.value,
-            "titreVignette": form.titreVignette.value,
+            "titreVignette": form.titreVignette.files[0].name
         }
         const token = `Bearer ${localStorage.getItem("api-film-token")}`;
         const options={
@@ -29,9 +29,24 @@ function Admin () {
             body: JSON.stringify(data),
         };
 
+        //register the info about the movie
         const reponse = await fetch("http://localhost:5000/api/films", options);
-        const json = await reponse.json();
-        console.log(json);
+        
+
+        //now we register the image
+        const image = form.titreVignette.files[0];
+        const formData = new FormData();
+
+        formData.append("image", image);
+        let options2 = {
+            method: "POST",
+            headers: {
+                authorization: token,
+            },
+            body: formData,
+        };
+        const reponseImage = await fetch("http://localhost:5000/api/films/upload-image", options2);
+        const traitementReponse = await reponseImage.json();
 
         if(reponse.status === 200){
             navigate("/liste-films")
@@ -57,7 +72,7 @@ function Admin () {
             <div className='wrapper'>
                 <h1>Insert a new movie</h1>
 
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} encType='multipart/form-data'>
                     <div>
                         <label htmlFor="titre">Titre</label>
                         <input type='text' name='titre'/>
@@ -72,7 +87,7 @@ function Admin () {
                     </div>
                     <div>
                         <label htmlFor="titreVignette">Titre Vignette</label>
-                        <input type='text' name='titreVignette'/>
+                        <input type='file' name='titreVignette'/>
                     </div>
                     <div>
                         <label htmlFor="annee">Annee</label>

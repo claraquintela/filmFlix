@@ -10,7 +10,9 @@ import Loading from '../Loading/Loading';
 function ListeFilms() {
 
 const [listeFilms, setListeFilms] = useState([]);
-const apiFilms = 'https://apifilm-4kgi.onrender.com/films'
+
+const apiFilms = 'https://four1f-tp1-claraquintela-1.onrender.com/api/films';
+// const apiFilms = 'https://apifilm-4kgi.onrender.com/films'
 const [urlFiltre, setUrlFiltre] = useState(apiFilms); 
 const [estCharge, setEstCharge] = useState(false);
 

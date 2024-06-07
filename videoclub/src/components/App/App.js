@@ -14,10 +14,10 @@ export const AppContext = React.createContext();
 
 function App() {
   let appState = "DEV"
-  let apiBaseURL = "https://apifilm-4kgi.onrender.com"
+  let apiBaseURL = "https://four1f-tp1-claraquintela-1.onrender.com"
 
   if(appState === "DEV"){
-      apiBaseURL="http://localhost:5000"
+      apiBaseURL="https://four1f-tp1-claraquintela-1.onrender.com"
     }
  
   const location = useLocation();

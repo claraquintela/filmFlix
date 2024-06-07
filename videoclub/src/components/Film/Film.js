@@ -173,6 +173,10 @@ export function Film(props) {
       return average;
     }
 
+    function deleteFilm(e){
+      console.log(film.id);
+    }
+
     return (
       <main>     
         <div className="page-film">
@@ -192,6 +196,11 @@ export function Film(props) {
               <p><span>Description:</span> {film.description}</p>
             </div>   
           </div>
+          {context.isLogged ? 
+            <button onClick={deleteFilm}>Delete</button>
+            :
+            ""
+          }
         </div>
 
         <div className="comments">
