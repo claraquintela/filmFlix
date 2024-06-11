@@ -69,7 +69,7 @@ function Admin () {
 
     return (
         <main>
-            <div className='wrapper'>
+            <div className='wrapper-form'>
                 <h1>Insert a new movie</h1>
 
                 <form onSubmit={onSubmit} encType='multipart/form-data'>
@@ -93,34 +93,44 @@ function Admin () {
                         <label htmlFor="annee">Annee</label>
                         <input type='text' name='annee'/>
                     </div>
-                    <div>
-                        <input type='checkbox' value="action" name="genres-action" onChange={onChange}/>
-                        <label>Action</label>
-                    </div>
-                    <div>
-                        <input type='checkbox' value="comedie" name="genres-comedie" onChange={onChange}/>
-                        <label>Comedie</label>
-                    </div>
-                    <div>
-                        <input type='checkbox' value="drama" name="genres-drama" onChange={onChange}/>
-                        <label>Drama</label>
-                    </div>
-                    <div>
-                        <input type='checkbox' value="fantasy" name="genres-fantasy " onChange={onChange}/>
-                        <label>Fantasy</label>
-                    </div>
-                    <div>
-                        <input type='checkbox' value="Horror" name="genres-Horror" onChange={onChange}/>
-                        <label>Horror</label>
-                    </div>
-                    <div>
-                        <input type='checkbox' value="sci-fi" name="genres-sci-fi" onChange={onChange}/>
-                        <label>Sci-fi</label>
+
+                    <div className='form-category'>
+                        <div className='form-input-group'>
+                            <input type='checkbox' value="action" name="genres-action" onChange={onChange}/>
+                            <label>Action</label>
+                        </div>
+                        <div className='form-input-group'>
+                            <input type='checkbox' value="comedie" name="genres-comedie" onChange={onChange}/>
+                            <label>Comedie</label>
+                        </div>
+                        <div className='form-input-group'>
+                            <input type='checkbox' value="documentary" name="genres-documentary" onChange={onChange}/>
+                            <label>Documentary</label>
+                        </div>
+                        <div className='form-input-group'>
+                            <input type='checkbox' value="drama" name="genres-drama" onChange={onChange}/>
+                            <label>Drama</label>
+                        </div>
+                        <div className='form-input-group'>
+                            <input type='checkbox' value="fantasy" name="genres-fantasy " onChange={onChange}/>
+                            <label>Fantasy</label>
+                        </div>
+                        <div>
+                            <input type='checkbox' value="Horror" name="genres-Horror" onChange={onChange}/>
+                            <label>Horror</label>
+                        </div>
+                        <div className='form-input-group'>
+                            <input type='checkbox' value="romance" name="genres-romance" onChange={onChange}/>
+                            <label>Romance</label>
+                        </div>
+                        <div className='form-input-group'>
+                            <input type='checkbox' value="sci-fi" name="genres-sci-fi" onChange={onChange}/>
+                            <label>Sci-fi</label>
+                        </div>
                     </div>
 
-
                     <div>
-                        <input type='submit'/>
+                        <input type='submit' className='btn'/>
                     </div>
                 </form>
             </div>

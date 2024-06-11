@@ -1,3 +1,19 @@
+.admin-link{
+    color: var(--zomp);
+    background-color: var(--icterine);
+    width: 5rem;
+    padding: 0.4rem;
+    margin: 0.6rem;
+    border-radius: 3px;
+    text-align: center;
+    justify-content: center;
+    transition: all 1s;
+}
+
+.admin-link:hover {
+    background-color: var(--zomp); 
+    color:  var(--icterine);
+}
 
 .wrapper {
     display: flex;

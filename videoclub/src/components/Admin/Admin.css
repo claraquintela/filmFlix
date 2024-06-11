@@ -1,0 +1,67 @@
+.wrapper-form{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+    & h1 {
+        color: var(--zomp);
+    }
+
+    & div {
+        margin: 1rem;
+    }
+
+    & form {
+        display: block;
+    }
+
+    & label {
+        display: block;
+    }
+
+    & input {
+        width: 20rem;
+        padding: 0.3rem;
+        margin:0.3rem
+    }
+
+    & input[type="checkbox"] {
+        width: initial;
+        padding: 0.3rem;
+        margin:0.3rem;
+
+        & +label {
+            display: inline;
+        }
+    }
+
+    & input[type="file"] {
+        width: 18rem;
+        background-color: var(--zomp);
+        color: var(--icterine);
+        border-radius: 1rem;
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+
+    & textarea{
+        width: 20rem;
+        height: 22rem;
+        padding: 0.3rem;
+        margin:0.3rem
+    }
+    
+    & .form-input-group{
+       display: flex;
+    }
+
+    & .btn {
+        width: initial;
+        background-color: var(--zomp);
+        color: var(--icterine);
+        border-radius: 1rem;
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+}

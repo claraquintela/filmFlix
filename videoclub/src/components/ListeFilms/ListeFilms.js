@@ -3,8 +3,8 @@ import TuileFilm from '../TuileFilm';
 import { Link } from 'react-router-dom';
 import './ListeFilms.css';
 import Filtre from '../Filtre/Filtre';
-import { motion } from "framer-motion";
 import Loading from '../Loading/Loading';
+import Animation from '../Animation/Animation';
 
 
 function ListeFilms() {
@@ -82,19 +82,14 @@ useEffect(() => {
         whenChanged={lien => filtres(lien) 
         }
       />
+
+      <Animation>
       {estCharge ? (
-        <motion.div
-          key="liste-film"
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          variants={animationBasVersHaut}
-        >
-          <div className='collection-tuiles'>    
-            {tuilesFilm}
-          </div> 
-        </motion.div>
+        <div className='collection-tuiles'>    
+          {tuilesFilm}
+        </div> 
       ) : ( <Loading/>)}
+      </Animation>
 
     </main>
 

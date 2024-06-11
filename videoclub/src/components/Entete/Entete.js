@@ -11,7 +11,7 @@ function Entete({handleLogin, handleLogout, user}) {
     <header >
       <div>
         {context.isLogged ? 
-          (<div>
+          (<div className='admin-link'>
               <NavLink to="/admin">Admin</NavLink>
               <button onClick={handleLogout} className='logout-form'>Déconnexion</button>
             </div>

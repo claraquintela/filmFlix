@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import './Film.css';
 import StarRating from "../StarRating/StarRating";
 import { AppContext } from "../App/App";
+import Animation from '../Animation/Animation';
 
 
 
@@ -10,7 +11,7 @@ export function Film(props) {
 
   const context =useContext(AppContext)
   const [comments, setComments] = useState([]);
-
+  const navigate = useNavigate();
 
   //pour avoir l'id qui a été passé dans la query string
     const { id } = useParams();
@@ -170,16 +171,30 @@ export function Film(props) {
       }
       const average = sum / arr.length;
 
-      return average;
+      return  parseFloat(average.toFixed(2));
     }
 
-    function deleteFilm(e){
-      console.log(film.id);
+    async function deleteFilm(){
+      try {
+        const response = await fetch(urlFilm, {
+          method: 'DELETE'
+        });
+    
+        if (response.ok) {
+          console.log('Film removed');
+          navigate("/liste-films");
+        } else {
+          console.error('Error:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
 
     return (
       <main>     
         <div className="page-film">
+          <Animation>
           <div className="page-film_wrapper"> 
             <img src={`/img/${film.titreVignette}`} alt={film.titre} />
             <div className="page-film_content">
@@ -196,12 +211,14 @@ export function Film(props) {
               <p><span>Description:</span> {film.description}</p>
             </div>   
           </div>
+          </Animation>
           {context.isLogged ? 
-            <button onClick={deleteFilm}>Delete</button>
+            <button className="btn-delete" onClick={deleteFilm}>Delete</button>
             :
             ""
           }
         </div>
+        
 
         <div className="comments">
           <div className="all-comments">

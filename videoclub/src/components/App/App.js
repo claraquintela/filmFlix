@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
-import { useState } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import Entete from "../Entete/Entete";
-import "./App.css";
-import Accueil from "../Accueil/Accueil";
-import ListeFilms from "../ListeFilms/ListeFilms";
-import Admin from "../Admin/Admin";
-import { Film } from "../Film/Film";
-import {jwtDecode} from "jwt-decode";
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
+  import React, { useEffect } from 'react';
+  import { useState } from "react";
+  import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+  import { AnimatePresence } from "framer-motion";
+  import Entete from "../Entete/Entete";
+  import "./App.css";
+  import Accueil from "../Accueil/Accueil";
+  import ListeFilms from "../ListeFilms/ListeFilms";
+  import Admin from "../Admin/Admin";
+  import { Film } from "../Film/Film";
+  import {jwtDecode} from "jwt-decode";
+  import PrivateRoute from '../PrivateRoute/PrivateRoute';
 export const AppContext = React.createContext();
 
 function App() {
